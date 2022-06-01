@@ -61,107 +61,58 @@ ssh <nombre>@<ip> -i <key.pem>
 # key.pem : es la key que descargamos. Tambien puede ser su path
 # ----
 
-# En mi caso eso 
+# En mi caso es:
 ssh ngutierrezp@20.226.41.118 -i ngutierrezp.pem
 ```
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+Con estos pasos ya pude entrar a mi VM creada: 
 
-Mira **Deployment** para conocer como desplegar el proyecto.
+<img width="588" alt="image" src="https://user-images.githubusercontent.com/19491901/171329259-36c089c7-0332-4993-9e64-1bed191d7efc.png">
 
+LISTO!! Ya podemos comenzar a trabajar en nuestra maquina!
 
-### Pre-requisitos 📋
+## Preparando el ambiente ⚙️
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+_Como ya tenemos la base que tendrá nuestra aplicación, es decir, donde estará alojada, lo siguiente es configurar el ambiente._
 
-```
-Da un ejemplo
-```
+Para comenzar a configurar el ambiente existen distintas maneras de hacerlo, dependiendo del enfoque que se quiera tomar. Para este caso iremos por el camino facil de implementación y toda la configurarción de ambiente se la dejaremos a [Docker](https://docs.docker.com/engine/install/ubuntu/). Por lo que debemos instalar Docker en nuestra VM.
 
-### Instalación 🔧
+### Instalando Docker en la VM
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+Para instalar Docker debemos siguir el paso a paso que nos dejan en su [pagina oficial](https://docs.docker.com/engine/install/ubuntu/). Cada comando se debe copiar y pegar en la consola de la maquina virtual.
 
-_Dí cómo será ese paso_
+- Update the apt package index and install packages to allow apt to use a repository over HTTPS:
 
-```
-Da un ejemplo
-```
+  ```bash
+  sudo apt-get update
+  sudo apt-get install \
+      ca-certificates \
+      curl \
+      gnupg \
+      lsb-release
+  ```
+- Add Docker’s official GPG key:
+  ```bash
+  sudo mkdir -p /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  ```
+- Use the following command to set up the repository:
+  ```bash
+  echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  ```
+- Install Docker: 
+  ```bash
+  sudo apt-get update 
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+  ```
+  
+Con estos pasos ya tenemos docker instalado en nuestra VM 🤜
 
-_Y repite_
+<img width="376" alt="image" src="https://user-images.githubusercontent.com/19491901/171331254-f568bd94-476b-4016-bae4-4a4b85e9f59f.png">
 
-```
-hasta finalizar
-```
-
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
-
-## Ejecutando las pruebas ⚙️
-
-_Explica como ejecutar las pruebas automatizadas para este sistema_
-
-### Analice las pruebas end-to-end 🔩
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-### Y las pruebas de estilo de codificación ⌨️
-
-_Explica que verifican estas pruebas y por qué_
-
-```
-Da un ejemplo
-```
-
-## Despliegue 📦
-
-_Agrega notas adicionales sobre como hacer deploy_
-
-## Construido con 🛠️
-
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-* [Maven](https://maven.apache.org/) - Manejador de dependencias
-* [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
-
-## Contribuyendo 🖇️
-
-Por favor lee el [CONTRIBUTING.md](https://gist.github.com/villanuevand/xxxxxx) para detalles de nuestro código de conducta, y el proceso para enviarnos pull requests.
-
-## Wiki 📖
-
-Puedes encontrar mucho más de cómo utilizar este proyecto en nuestra [Wiki](https://github.com/tu/proyecto/wiki)
-
-## Versionado 📌
-
-Usamos [SemVer](http://semver.org/) para el versionado. Para todas las versiones disponibles, mira los [tags en este repositorio](https://github.com/tu/proyecto/tags).
-
-## Autores ✒️
-
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
-* **Andrés Villanueva** - *Trabajo Inicial* - [villanuevand](https://github.com/villanuevand)
-* **Fulanito Detal** - *Documentación* - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto. 
-
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
-
-## Expresiones de Gratitud 🎁
-
-* Comenta a otros sobre este proyecto 📢
-* Invita una cerveza 🍺 o un café ☕ a alguien del equipo. 
-* Da las gracias públicamente 🤓.
-* Dona con cripto a esta dirección: `0xf253fc233333078436d111175e5a76a649890000`
-* etc.
+_Si no pudista instalar docker, no dudes en consultarme._
 
 
 
----
-⌨️ con ❤️ por [Villanuevand](https://github.com/Villanuevand) 😊
