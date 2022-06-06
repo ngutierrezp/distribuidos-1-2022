@@ -1,0 +1,11 @@
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+.App {
+  background-color: #1c1c1c;
+  opacity: 1;
+  background-image: radial-gradient(#878787 0.75px, transparent 0.75px),
+    radial-gradient(#878787 0.75px, #1c1c1c 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
