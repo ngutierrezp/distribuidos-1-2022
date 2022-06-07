@@ -3,6 +3,29 @@ _Repositorio para ayudantia de Sistemas Distribuidos 1-2022 (USACH)_
 
 Con ❤️ por [ngutierrezp](https://github.com/ngutierrezp) 🤓
 
+## Resumen
+
+En este proyecto crearemos una Poke app distribuida con el siguiente stack de tecnologias:
+  - Kafka
+  - Docker
+  - Zookeeper
+  - Kafdrop
+  - React
+  - Nginx
+  - FastApi
+  - Python
+  - Azure
+ 
+La aplicación distribuida posee a siguiente arquitectura: 
+
+![Distribuidos 1-2022](https://user-images.githubusercontent.com/19491901/172295460-2320c732-114c-4384-9fb2-c87aae7914a8.png)
+
+Sin embargo el flujo que datos sigue el siguiente esquema:
+
+![Diagrama en blanco](https://user-images.githubusercontent.com/19491901/172295595-17be9030-3ec9-4f6f-90d6-f8b146537b04.png)
+
+**UPDATE:** En la ultima actualización del proyecto se agregó un nuevo tópico y un nuevo consumidor del tópico.
+
 ## Comenzando 🚀
 
 Para esta ayudantia, utilizaremos la plataforma Cloud de [Azure](https://azure.microsoft.com/es-es/free/students/) la cual provee $100 en Creditos para utilizar dentro de sus aplicaciones. Sin embargo es posible utilizar cualquier otra plataforma Cloud como : 
@@ -114,31 +137,21 @@ Con estos pasos ya tenemos docker instalado en nuestra VM 🤜
 
 _Si no pudista instalar docker, no dudes en consultarme._
 
+---------------
 
-Ahora veamos el docker-compose : 
+## Levantando el proyecto ...
 
-```yml
-version: '2'
-services:
-  zookeeper:
-    image: wurstmeister/zookeeper:3.4.6
-    ports:
-     - "2181:2181"
-  kafka:
-    build: .
-    ports:
-     - "9092:9092"
-    expose:
-     - "9093"
-    environment:
-      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
-      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    volumes:
-     - /var/run/docker.sock:/var/run/docker.sock
-```
+Ya estamos listos para producir y consumir datos: 
 
 
 
+El siguiente paso se levantar los contenedores de docker. Este proyecto posee los siguientes contenedores:
+
+- kafka
+- zookeeper
+- productor
+- consumidor1
+- consumidor2
+- kafdrop
+
+Todos están conectados bajo el mismo network (kafka-bridge)
