@@ -48,17 +48,36 @@ services:
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
 
-  consumer:
-    container_name: consumer
+  poke_consumer_stats:
+    container_name: poke_consumer_stats
     build:
-      context: ./consumer
+      context: ./poke_consumer_stats
       dockerfile: Dockerfile
     environment:
-      - KAFKA_TOPIC_NAME=topic_test
+      - KAFKA_TOPIC_NAME=poke_topic
       - KAFKA_SERVER=kafka
       - KAFKA_PORT=29092
     ports:
       - 8001:8001
+    restart: "always"
+    depends_on:
+      - zookeeper
+      - kafka
+      - publisher
+    networks:
+      - broker-kafka
+
+  poke_consumer_types:
+    container_name: poke_consumer_types
+    build:
+      context: ./poke_consumer_types
+      dockerfile: Dockerfile
+    environment:
+      - KAFKA_TOPIC_NAME=poke_types
+      - KAFKA_SERVER=kafka
+      - KAFKA_PORT=29092
+    ports:
+      - 8002:8002
     restart: "always"
     depends_on:
       - zookeeper
@@ -73,7 +92,8 @@ services:
       context: ./publisher
       dockerfile: Dockerfile
     environment:
-      - KAFKA_TOPIC_NAME=topic_test
+      - KAFKA_TOPIC_NAME=poke_topic
+      - KAFKA_TOPIC_NAME_2=poke_types
       - KAFKA_SERVER=kafka
       - KAFKA_PORT=29092
     ports:

@@ -8,11 +8,13 @@ class Kafka:
 
     def __init__(
         self,
-        topic,
+        topic1,
+        topic2,
         port,
         servers
     ) -> None:
-        self._topic = topic
+        self._topic1 = topic1
+        self._topic2 = topic2
         self._port = port
         self._servers = servers
         self.aioproducer = self.create_kafka()
