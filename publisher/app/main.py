@@ -16,6 +16,8 @@ load_dotenv()
 
 app = FastAPI(title='Kafka Publisher Poke API')
 origins = [
+    "http://10.1.0.5"
+    "http://20.197.232.133"
     "http://localhost",
     "http://localhost:3000",
     "http://localhost:80",
