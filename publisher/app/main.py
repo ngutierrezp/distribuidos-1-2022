@@ -9,13 +9,29 @@ from app.routers import publisher
 from dotenv import load_dotenv
 
 from fastapi import Depends, FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 
 
-app = FastAPI(title='Kafka Publisher API')
+app = FastAPI(title='Kafka Publisher Poke API')
+origins = [
+    "http://localhost",
+    "http://localhost:3000",
+    "http://localhost:80",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 kafka_server = Kafka(
-    topic=EnvironmentVariables.KAFKA_TOPIC_NAME.get_env(),
+    topic1=EnvironmentVariables.KAFKA_TOPIC_NAME.get_env(),
+    topic2=EnvironmentVariables.KAFKA_TOPIC_NAME_2.get_env(),
     port=EnvironmentVariables.KAFKA_PORT.get_env(),
     servers=EnvironmentVariables.KAFKA_SERVER.get_env(),
 )

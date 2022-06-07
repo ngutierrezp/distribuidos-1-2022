@@ -1,21 +1,51 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Avatar from "@mui/material/Avatar";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 function Pokemon() {
   const [pokemons, setPokemons] = useState([]);
   const [pokemon, setPokemon] = useState({});
   const [pokemonInfo, setPokemonInfo] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [fetchInfo, setFetchInfo] = useState(null);
+
+  const handleFetchInfo = (state) => {
+    setFetchInfo(state);
+    // set timeout 2seg
+    setTimeout(() => {
+      setFetchInfo(null);
+    }, 2000);
+  };
+
+  const sendPost = (data) => {
+    setLoading(true);
+    fetch("http://localhost:8000/producer", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        setLoading(false);
+        handleFetchInfo("success");
+        return response.json();
+      })
+      .catch((error) => {
+        setLoading(false);
+        handleFetchInfo("error");
+        console.log(error);
+      });
+  };
+
   const handleInput = (e: React.SyntheticEvent, value: string[]) => {
     setPokemon(value);
   };
@@ -187,15 +217,39 @@ function Pokemon() {
             </div>
           )}
           <div className="d-flex justify-content-center py-3 mt-3">
-            <Button
+            <LoadingButton
               disabled={pokemonInfo === null}
               color="primary"
               variant="outlined"
               size="large"
+              loading={loading || fetchInfo !== null}
+              onClick={() => {
+                sendPost({
+                  id: pokemonInfo.id,
+                  name: pokemonInfo.species.name,
+                  pokemon: pokemonInfo,
+                });
+              }}
             >
               Producir pokemon
-            </Button>
+            </LoadingButton>
           </div>
+          {fetchInfo !== null && fetchInfo === "success" && (
+            <Typography
+              variant="body1"
+              sx={{ textAlign: "center", color: "green" }}
+            >
+              <p className="px-1">Pokemon Producido ✅</p>
+            </Typography>
+          )}
+          {fetchInfo !== null && fetchInfo === "error" && (
+            <Typography
+              variant="body1"
+              sx={{ textAlign: "center", color: "red" }}
+            >
+              <p className="px-1">Pokemon no producido ❌</p>
+            </Typography>
+          )}
         </Card>
       </div>
     </div>

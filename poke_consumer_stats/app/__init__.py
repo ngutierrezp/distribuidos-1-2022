@@ -18,7 +18,17 @@ def main():
         )
         for message in consumer:
             print("%s:%d:%d: key=%s value=%s" % (message.topic, message.partition,
-                                                 message.offset, message.key, message.value))
+                                                 message.offset, message.key, message.value['id']))
+            id = message.value['id']
+            pokemon = message.value['pokemon']
+            name = pokemon['name']
+            # Calculate the stats of the pokemon
+            mean = sum(stat['base_stat'] for stat in pokemon['stats']) / len(pokemon['stats'])
+            maxStat = max(stat['base_stat'] for stat in pokemon['stats'])
+            minStat = min(stat['base_stat'] for stat in pokemon['stats'])
+            # Print the stats
+            print(f'Pokemon {name} ({id}) has the following stats: mean: {mean}, max: {maxStat}, min: {minStat}')
+
 
     except Exception as e:
         logging.info('Connection successful', e)

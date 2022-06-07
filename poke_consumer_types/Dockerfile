@@ -16,7 +16,7 @@ RUN apt update && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
 # Make a directory for app
-WORKDIR /consumer
+WORKDIR /poke_consumer_types
 
 # Install dependencies
 COPY requirements.txt .
