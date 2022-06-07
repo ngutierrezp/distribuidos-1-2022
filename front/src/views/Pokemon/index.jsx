@@ -26,7 +26,7 @@ function Pokemon() {
 
   const sendPost = (data) => {
     setLoading(true);
-    fetch("http://localhost:8000/producer", {
+    fetch("http://10.1.0.5:8000/producer", {
       method: "POST",
       headers: {
         Accept: "application/json",
