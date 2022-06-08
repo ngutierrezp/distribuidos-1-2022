@@ -207,7 +207,7 @@ Luego se debe habilitar los puertos con el boton de _Agregar regla de puerto de 
 
 <img width="319" alt="image" src="https://user-images.githubusercontent.com/19491901/172533539-e8ac4b0d-9e82-4c6a-b0ee-ea56ea5b5920.png">
 
-Se deben habilitar los puertos : `80`, `8000` y `12000`
+Se deben habilitar los puertos : `80`, `8000` y `19000`
 
 <img width="1128" alt="image" src="https://user-images.githubusercontent.com/19491901/172533635-cae6d834-3ddf-4a1f-9381-35ae850a0147.png">
 
