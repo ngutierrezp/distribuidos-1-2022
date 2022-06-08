@@ -161,3 +161,53 @@ El siguiente paso se levantar los contenedores de docker. Este proyecto posee lo
 - kafdrop
 
 Todos están conectados bajo el mismo network (kafka-bridge)
+
+Para levantar el proyecto solo se debe ejecutar 
+```bash
+# Debe estar en la carpeta princiapl / root
+sudo docker-compose up --build
+```
+
+Para cerrar todo el proyecto basta con correr
+
+```
+# Debe estar en la carpeta princiapl / root
+sudo docker-compose down
+```
+
+
+-----
+Cuando el proyecto esté corriendo las aplicaciones serán alojadas en las siguientes rutas:
+
+- **front:** [http://localhost/](http://localhost/) - puerto `80`
+- **publisher:** [http://localhost:8000](http://localhost:8000) - puerto `8000`
+- **poke_consumer_stats:** [http://localhost:8001](http://localhost:8001) - puerto `8001`
+- **poke_consumer_types:** [http://localhost:8002](http://localhost:8002) - puerto `8002`
+- **Kafdrop:** [http://localhost:19000](http://localhost:19000) - puerto `19000`
+- **Kafka:** [http://localhost:29029](http://localhost:29029) - puerto `29029`
+- **Zookeper:** [http://localhost:9000](http://localhost:9000) - puerto `9000`
+
+
+y Listo!
+
+Nuestra App ya está corriendo!
+
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/19491901/172532376-57c3e731-1960-4e75-8dad-983ad1ca4146.png">
+
+<img width="1230" alt="image" src="https://user-images.githubusercontent.com/19491901/172532524-5801cd9c-3c9d-4a4a-b2c6-a0b9e77bf2c1.png">
+
+## Apertura de puertos en Azure
+
+Dados los puertos anteriores, es necesario que se habran los siguientes puertos. Para hacerlo se debe ir a la configuración del proyecto, y en el panel izquierdo > Redes
+
+<img width="1273" alt="Screen Shot 2022-06-08 at 00 40 28" src="https://user-images.githubusercontent.com/19491901/172533272-5fe447b1-8e09-4805-abfe-af47d68e511c.png">
+
+
+Luego se debe habilitar los puertos con el boton de _Agregar regla de puerto de entrada_ : 
+
+<img width="319" alt="image" src="https://user-images.githubusercontent.com/19491901/172533539-e8ac4b0d-9e82-4c6a-b0ee-ea56ea5b5920.png">
+
+Se deben habilitar los puertos : `80`, `8000` y `12000`
+
+<img width="1128" alt="image" src="https://user-images.githubusercontent.com/19491901/172533635-cae6d834-3ddf-4a1f-9381-35ae850a0147.png">
+
