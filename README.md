@@ -3,6 +3,8 @@ _Repositorio para ayudantia de Sistemas Distribuidos 1-2022 (USACH)_
 
 Con ❤️ por [ngutierrezp](https://github.com/ngutierrezp) 🤓
 
+El proyecto está corriendo bajo esta IP : [http://20.197.232.133/](http://20.197.232.133/)
+
 ## Resumen
 
 En este proyecto crearemos una Poke app distribuida con el siguiente stack de tecnologias:
